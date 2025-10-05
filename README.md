@@ -256,15 +256,3 @@ The API provides comprehensive error handling with appropriate HTTP status codes
 2. Update seed data if needed
 3. Add/modify route handlers
 4. Test endpoints thoroughly
-
-## 📄 License
-
-MIT License - see LICENSE file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
