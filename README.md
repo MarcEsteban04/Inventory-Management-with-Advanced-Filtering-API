@@ -214,11 +214,148 @@ npm run seed
 
 ## 🧪 Testing
 
-The API can be tested using tools like Postman, Insomnia, or curl. A health check endpoint is available:
+The API can be tested using tools like Postman, Insomnia, or curl. Here are comprehensive testing examples:
+
+### **Quick Browser Tests**
+
+1. **Health Check**
+   ```
+   GET http://localhost:3000/health
+   ```
+
+2. **Get All Products**
+   ```
+   GET http://localhost:3000/api/products
+   ```
+
+3. **Get Single Product**
+   ```
+   GET http://localhost:3000/api/products/1
+   ```
+
+4. **Filter Products by Tag**
+   ```
+   GET http://localhost:3000/api/products?tag=Electronics
+   ```
+
+5. **Filter Products by Minimum Stock**
+   ```
+   GET http://localhost:3000/api/products?min_stock=30
+   ```
+
+6. **Search Products by Name**
+   ```
+   GET http://localhost:3000/api/products?name=iPhone
+   ```
+
+7. **Combined Filtering**
+   ```
+   GET http://localhost:3000/api/products?tag=Premium&min_stock=15
+   ```
+
+8. **Get All Tags**
+   ```
+   GET http://localhost:3000/api/tags
+   ```
+
+9. **Get Single Tag with Products**
+   ```
+   GET http://localhost:3000/api/tags/1
+   ```
+
+### **POST/PATCH/DELETE Testing (use Postman or curl)**
+
+10. **Create New Product**
+    ```bash
+    POST http://localhost:3000/api/products
+    Content-Type: application/json
+    
+    {
+      "name": "Test Product",
+      "description": "A test product for demonstration",
+      "price": 299.99,
+      "initial_stock": 50,
+      "tags": ["Electronics", "Sale"]
+    }
+    ```
+
+11. **Add Stock (Inventory In)**
+    ```bash
+    POST http://localhost:3000/api/products/1/stock
+    Content-Type: application/json
+    
+    {
+      "type": "in",
+      "quantity": 25,
+      "reason": "New shipment received"
+    }
+    ```
+
+12. **Remove Stock (Inventory Out)**
+    ```bash
+    POST http://localhost:3000/api/products/1/stock
+    Content-Type: application/json
+    
+    {
+      "type": "out",
+      "quantity": 5,
+      "reason": "Product sold"
+    }
+    ```
+
+13. **Update Product**
+    ```bash
+    PATCH http://localhost:3000/api/products/1
+    Content-Type: application/json
+    
+    {
+      "name": "Updated Product Name",
+      "price": 349.99
+    }
+    ```
+
+14. **Create New Tag**
+    ```bash
+    POST http://localhost:3000/api/tags
+    Content-Type: application/json
+    
+    {
+      "name": "Gaming",
+      "description": "Gaming-related products"
+    }
+    ```
+
+15. **Delete Product**
+    ```bash
+    DELETE http://localhost:3000/api/products/7
+    ```
+
+### **Using curl Commands**
 
 ```bash
-GET /health
+# Health check
+curl http://localhost:3000/health
+
+# Get all products
+curl http://localhost:3000/api/products
+
+# Get Electronics products
+curl "http://localhost:3000/api/products?tag=Electronics"
+
+# Create new product
+curl -X POST http://localhost:3000/api/products \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test Product","price":99.99,"initial_stock":10}'
+
+# Add stock
+curl -X POST http://localhost:3000/api/products/1/stock \
+  -H "Content-Type: application/json" \
+  -d '{"type":"in","quantity":20,"reason":"Restock"}'
 ```
+
+### **Import Postman Collection**
+
+For comprehensive testing, import the included `postman_collection.json` file into Postman. It contains all endpoints with example requests.
 
 ## 🚦 Error Handling
 
